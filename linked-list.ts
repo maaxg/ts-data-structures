@@ -30,7 +30,7 @@ class LinkedList<T> {
     this.head = newHead
   }
 
-  public deleteWithValue(data: T){
+  public delete(data: T){
     if(this.head === null) return;
     if(this.head.data === data) {
       this.head = this.head.next
@@ -46,16 +46,18 @@ class LinkedList<T> {
     }
   }
 
-  public findWithValue(data: T){
-    let foundedValue = data;
+  public exists(data: T){
+    if(this.head.data === data) return true
+    let valueExists = false;
     let current = this.head
     while (current.next != null) {
+      console.log(current.next.data)
       if(current.next.data === data) {
-        foundedValue = data
+        valueExists = true
       }
       current = current.next
     }
-    return foundedValue;
+    return valueExists;
   }
 
   public printInOrder(){
@@ -73,4 +75,8 @@ const linkedList = new LinkedList()
 linkedList.append(1)
 linkedList.append(3)
 linkedList.append(4)
+linkedList.prepend(5)
 linkedList.printInOrder()
+linkedList.delete(4)
+linkedList.printInOrder()
+console.log(linkedList.exists(1))

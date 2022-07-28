@@ -1,13 +1,12 @@
-var NodeC = /** @class */ (function () {
+var NodeC = (function () {
     function NodeC(data) {
         this.data = data;
     }
     return NodeC;
 }());
-var LinkedList = /** @class */ (function () {
+var LinkedList = (function () {
     function LinkedList() {
     }
-    // add an element in the end of the list
     LinkedList.prototype.append = function (data) {
         if (this.head == null) {
             this.head = new NodeC(data);
@@ -19,13 +18,12 @@ var LinkedList = /** @class */ (function () {
         }
         current.next = new NodeC(data);
     };
-    // add an element in the start of the list
     LinkedList.prototype.prepend = function (data) {
         var newHead = new NodeC(data);
         newHead.next = this.head;
         this.head = newHead;
     };
-    LinkedList.prototype.deleteWithValue = function (data) {
+    LinkedList.prototype["delete"] = function (data) {
         if (this.head === null)
             return;
         if (this.head.data === data) {
@@ -41,16 +39,19 @@ var LinkedList = /** @class */ (function () {
             current = current.next;
         }
     };
-    LinkedList.prototype.findWithValue = function (data) {
-        var foundedValue = data;
+    LinkedList.prototype.exists = function (data) {
+        if (this.head.data === data)
+            return true;
+        var valueExists = false;
         var current = this.head;
         while (current.next != null) {
+            console.log(current.next.data);
             if (current.next.data === data) {
-                foundedValue = data;
+                valueExists = true;
             }
             current = current.next;
         }
-        return foundedValue;
+        return valueExists;
     };
     LinkedList.prototype.printInOrder = function () {
         var current = this.head;
@@ -67,4 +68,8 @@ var linkedList = new LinkedList();
 linkedList.append(1);
 linkedList.append(3);
 linkedList.append(4);
+linkedList.prepend(5);
 linkedList.printInOrder();
+linkedList["delete"](4);
+linkedList.printInOrder();
+console.log(linkedList.exists(1));
