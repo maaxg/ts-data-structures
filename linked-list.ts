@@ -1,15 +1,18 @@
 class NodeC<T> {
-  next: NodeC<T>;
+  next: NodeC<T> | null;
   data: T
   constructor(data: T) {
     this.data = data
+    this.next = null
   }
 }
 
-class LinkedList<T> {
-  head: NodeC<T>;
+export class LinkedList<T> {
+  head: NodeC<T> | null;
 
-  constructor(){}
+  constructor(){
+    this.head = null
+  }
 
   // add an element in the end of the list
   public append(data: T) {
@@ -47,10 +50,10 @@ class LinkedList<T> {
   }
 
   public exists(data: T){
-    if(this.head.data === data) return true
+    if(this.head?.data === data) return true
     let valueExists = false;
     let current = this.head
-    while (current.next != null) {
+    while (current?.next != null) {
       console.log(current.next.data)
       if(current.next.data === data) {
         valueExists = true
@@ -62,8 +65,8 @@ class LinkedList<T> {
 
   public printInOrder(){
     let current = this.head
-    let str = `${current.data} `
-    while(current.next != null) {
+    let str = `${current?.data} `
+    while(current?.next != null) {
       str += `${current.next.data} `
       current = current.next
     }
